@@ -4,7 +4,7 @@
 // 2018-09-12 jp112sdl Creative Commons - http://creativecommons.org/licenses/by-nc-sa/3.0/de/
 //- -----------------------------------------------------------------------------------------------------------------------
 
-// #define NDEBUG  
+//#define NDEBUG  
 
 // define this to read the device id, serial and device type from bootloader section
 // #define USE_OTA_BOOTLOADER
@@ -14,13 +14,14 @@
 #include <EnableInterrupt.h>
 #include <AskSinPP.h>
 #include <LowPower.h>
-
+#include <secret.h>      // hier sind die HM Key's drin, in extra Datei damit nicht zu Git gesynct wird !
 #include <Switch.h>
 
 //pins are fixed by the pcb layout
 #define LED_PIN           5  // low-active
 #define CONFIG_BUTTON_PIN 4
 #define RELAY1_PIN        8
+
 
 // number of available peers per channel
 #define PEERS_PER_CHANNEL 8
@@ -30,8 +31,8 @@ using namespace as;
 
 // define all device properties
 const struct DeviceInfo PROGMEM devinfo = {
-  {0x01, 0xd8, 0x01},     // Device ID
-  "S26PLG0001",           // Device Serial
+  {0x01, 0xd8, 0x03},     // Device ID
+  "FS26PLG968",           // Device Serial
   {0x00,0xd8},            // Device Model
   0x26,                   // Firmware Version
   as::DeviceType::Switch, // Device Type
