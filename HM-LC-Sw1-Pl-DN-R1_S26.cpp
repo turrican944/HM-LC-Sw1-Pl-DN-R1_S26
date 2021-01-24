@@ -4,7 +4,7 @@
 // 2018-09-12 jp112sdl Creative Commons - http://creativecommons.org/licenses/by-nc-sa/3.0/de/
 //- -----------------------------------------------------------------------------------------------------------------------
 
-//#define NDEBUG  
+#define NDEBUG  
 
 // define this to read the device id, serial and device type from bootloader section
 // #define USE_OTA_BOOTLOADER
@@ -31,8 +31,8 @@ using namespace as;
 
 // define all device properties
 const struct DeviceInfo PROGMEM devinfo = {
-  {0x01, 0xd8, 0x03},     // Device ID
-  "FS26PLG968",           // Device Serial
+  {0x01, 0xd8, 0x05},     // Device ID
+  "FS26PLG911",           // Device Serial
   {0x00,0xd8},            // Device Model
   0x26,                   // Firmware Version
   as::DeviceType::Switch, // Device Type
@@ -76,6 +76,13 @@ void setup () {
   initPeerings(first);
   sdev.initDone();
   sdev.led().invert(true);  // inverts the LED signal, otherwise the blue LED lights up permanently and flashes only by status requests
+
+  /**
+  // Set frequency for CC1101 hier setzen wird nochmal die individuelle QRG falls das EEprom mal die Daten vergisst.
+  hal.radio.initReg(CC1101_FREQ2, 0x21);
+  hal.radio.initReg(CC1101_FREQ1, 0x65);
+  hal.radio.initReg(CC1101_FREQ0, 0xCA);
+  **/
 }
 
 void loop() {
